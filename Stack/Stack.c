@@ -17,19 +17,19 @@ int Is_empty(Stack *stk);
 int main()
 {
     Stack *stk = create_stack();
-    
-    Push(stk,1);
-    Push(stk,2);
-    
+
+    Push(stk, 1);
+    Push(stk, 2);
+
     Element x;
-    Top(stk,&x);
-    printf("Top: %d\n",x);
+    Top(stk, &x);
+    printf("Top: %d\n", x);
 
-    Pop(stk,&x);
-    printf("Pop: %d\n",x);
+    Pop(stk, &x);
+    printf("Pop: %d\n", x);
 
-    Top(stk,&x);
-    printf("Top: %d\n",x);
+    Top(stk, &x);
+    printf("Top: %d\n", x);
 
     destroy_stack(stk);
     return 0;
@@ -75,10 +75,11 @@ int Push(Stack *stk, Element elm)
         newElement->info = elm;
 
         if (stk->top == NULL)
-        {    
+        {
             newElement->prev = NULL;
-            
-        }else{
+        }
+        else
+        {
             newElement->prev = stk->top;
         }
 
@@ -89,10 +90,11 @@ int Push(Stack *stk, Element elm)
     return 0;
 }
 
-int Pop(Stack *stk, Element *elm){
-     if (stk && !Is_empty(stk))
-    {   
-        Node * remove = stk->top;
+int Pop(Stack *stk, Element *elm)
+{
+    if (stk && !Is_empty(stk))
+    {
+        Node *remove = stk->top;
         *elm = remove->info;
         stk->top = remove->prev;
         destroy_node(remove);
@@ -102,8 +104,9 @@ int Pop(Stack *stk, Element *elm){
     return 0;
 }
 
-int Top(Stack *stk, Element *elm){
-     if (stk && !Is_empty(stk))
+int Top(Stack *stk, Element *elm)
+{
+    if (stk && !Is_empty(stk))
     {
         *elm = stk->top->info;
         return 1;
@@ -112,23 +115,26 @@ int Top(Stack *stk, Element *elm){
     return 0;
 }
 
-int Is_empty(Stack *stk){
-    if(stk->top == NULL){
+int Is_empty(Stack *stk)
+{
+    if (stk->top == NULL)
+    {
         return 1;
     }
-        return 0;
+    return 0;
 }
 
-void destroy_stack(Stack *stk){
-   while (stk->top)
-   {
-        Node * remove = stk->top;
+void destroy_stack(Stack *stk)
+{
+    while (stk->top)
+    {
+        Node *remove = stk->top;
         stk->top = remove->prev;
         destroy_node(remove);
-   }
-   
+    }
 }
 
-void destroy_node(Node *node){
+void destroy_node(Node *node)
+{
     free(node);
 }
